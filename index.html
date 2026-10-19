@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KnowledgeReady — Richer knowledge. More capable AI. More capable people.</title>
+<meta name="description" content="KnowledgeReady helps organizations preserve and structure valuable information conventional document processing leaves behind, giving AI applications a richer foundation to work from. Powered by AILANG Parse.">
+<meta property="og:title" content="Are your people KnowledgeReady?">
+<meta property="og:description" content="Turn your organization's collective knowledge into a competitive advantage.">
+<meta property="og:image" content="https://www.sunholo.com/knowledgeready/img/hero.jpg">
+<link rel="icon" href="img/wordmark-transparent.png">
+<style>
+  :root{
+    --forest:#233D2C;
+    --muted-green:#58734B;
+    --sage:#A1A58B;
+    --ivory:#EAE8DC;
+    --ivory-light:#F7F6EF;
+    --bark:#52483D;
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--forest);
+    background:var(--ivory-light);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .section{padding:88px 0}
+  .section--ivory{background:var(--ivory-light)}
+  .section--forest{background:var(--forest);color:var(--ivory-light)}
+  .eyebrow{
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted-green);font-weight:600;margin:0 0 14px;
+  }
+  .section--forest .eyebrow{color:var(--sage)}
+  h1{font-size:clamp(34px,5vw,54px);line-height:1.08;margin:0 0 18px;font-weight:700}
+  h2{font-size:clamp(28px,4vw,38px);line-height:1.15;margin:0 0 10px;font-weight:700}
+  h3{font-size:19px;margin:0 0 8px;font-weight:700}
+  .lede{font-size:20px;font-weight:600;margin:0 0 18px;color:var(--muted-green)}
+  .section--forest .lede{color:var(--sage)}
+  p{margin:0 0 16px;font-size:16.5px}
+  .btn{
+    display:inline-block;padding:14px 28px;border-radius:8px;
+    font-weight:700;font-size:15.5px;text-decoration:none;
+    background:var(--forest);color:var(--ivory-light);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(35,61,44,.25)}
+  .btn--ghost{background:transparent;border:2px solid var(--ivory-light);color:var(--ivory-light)}
+  .link{
+    color:var(--muted-green);font-weight:600;text-decoration:none;
+    border-bottom:1px solid var(--sage);padding-bottom:1px;font-size:15px;
+  }
+  .section--forest .link{color:var(--sage);border-color:var(--muted-green)}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:20;background:rgba(247,246,239,.92);
+    backdrop-filter:blur(6px);border-bottom:1px solid rgba(35,61,44,.08);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+  header img{height:34px;width:auto}
+  header nav a{margin-left:22px;font-size:14px;font-weight:600;text-decoration:none;color:var(--forest)}
+
+  /* hero */
+  .hero{padding:56px 0 72px}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+  @media (min-width:860px){.hero-grid{grid-template-columns:1.1fr 1fr}}
+  .hero-photo{
+    border-radius:16px;overflow:hidden;background:var(--bark);
+    aspect-ratio:3/4;max-height:640px;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:28px}
+  .hero-sub{margin-top:10px;font-size:14px;color:var(--bark)}
+
+  /* benefit strip */
+  .benefits{display:grid;grid-template-columns:1fr;gap:28px;text-align:left}
+  @media (min-width:760px){.benefits{grid-template-columns:repeat(3,1fr)}}
+  .benefit h3{color:var(--forest)}
+
+  /* story sections with photo */
+  .story{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+  @media (min-width:860px){.story{grid-template-columns:1fr 1fr}}
+  .story-photo{border-radius:16px;overflow:hidden;aspect-ratio:4/3}
+  .story-photo img{width:100%;height:100%;object-fit:cover}
+  .story.reverse .story-photo{order:2}
+  @media (max-width:859px){.story.reverse .story-photo{order:0}}
+  ul.plain{margin:0 0 16px;padding-left:20px}
+  ul.plain li{margin-bottom:8px}
+
+  .feature-grid{display:grid;grid-template-columns:1fr;gap:20px;margin:28px 0}
+  @media (min-width:760px){.feature-grid{grid-template-columns:repeat(3,1fr)}}
+  .feature-card{
+    background:var(--ivory-light);border:1px solid rgba(35,61,44,.12);
+    border-radius:12px;padding:22px;
+  }
+  .section--forest .feature-card{background:rgba(255,255,255,.06);border-color:rgba(234,232,220,.18)}
+
+  .stat-row{display:flex;flex-wrap:wrap;gap:36px;margin:28px 0}
+  .stat{min-width:140px}
+  .stat .num{font-size:34px;font-weight:700;color:var(--forest);display:block}
+  .section--forest .stat .num{color:var(--ivory-light)}
+  .stat .label{font-size:13px;color:var(--bark)}
+  .section--forest .stat .label{color:var(--sage)}
+  .fine{font-size:12.5px;color:var(--bark);opacity:.85}
+  .section--forest .fine{color:var(--sage)}
+
+  .cta-final{text-align:center}
+  .cta-final .btn{margin-top:18px}
+
+  footer{background:var(--forest);color:var(--ivory-light);padding:48px 0 32px;font-size:14px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between}
+  footer a{text-decoration:none;color:var(--sage)}
+  footer .col h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
+  footer .col p{margin:0 0 6px;color:var(--ivory-light)}
+  .bottom-line{border-top:1px solid rgba(234,232,220,.15);margin-top:32px;padding-top:20px;font-size:12.5px;color:var(--sage)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#"><img src="img/wordmark-light.svg" alt="KnowledgeReady"></a>
+    <nav>
+      <a href="#product-evidence">What it preserves</a>
+      <a href="https://www.sunholo.com/ailang-parse/?ref=robert">AILANG Parse</a>
+      <a class="btn" style="padding:9px 18px;font-size:14px" href="https://www.sunholo.com/ailang-parse/workbench.html?ref=robert">Try the technology</a>
+    </nav>
+  </div>
+</header>
+
+<!-- SECTION 1. HERO -->
+<section class="section hero section--ivory">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">KnowledgeReady, powered by AILANG Parse</p>
+      <h1>Are your people KnowledgeReady?</h1>
+      <p class="lede">Turn your organization's collective knowledge into a competitive advantage.</p>
+      <p><strong>Richer knowledge. More capable AI. More capable people.</strong></p>
+      <p>KnowledgeReady helps organizations preserve and structure valuable information that conventional document processing may leave behind, giving existing AI applications a richer foundation to work from.</p>
+      <p>Your organization has accumulated years of knowledge through projects, decisions, correspondence and experience. Much of that knowledge lives in documents and communications, but valuable information about how it was created can be lost when those documents are prepared for AI. KnowledgeReady helps preserve more of that information so organizations can build on what they already know.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="https://www.sunholo.com/ailang-parse/workbench.html?ref=robert">Try the technology</a>
+        <a class="btn" style="background:transparent;border:2px solid var(--forest);color:var(--forest)" href="mailto:knowledgeready@sunholo.com?subject=KnowledgeReady%20-%20Discuss%20a%20use%20case">Discuss your use case</a>
+      </div>
+      <p class="hero-sub">Explore the underlying <a class="link" href="https://www.sunholo.com/ailang-parse/?ref=robert">AILANG Parse technology</a> in the Sunholo Workbench.</p>
+    </div>
+    <div class="hero-photo">
+      <picture>
+        <source srcset="img/hero.webp" type="image/webp">
+        <img src="img/hero.jpg" alt="A mature tree in mist, roots to crown — the KnowledgeReady metaphor" loading="eager">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2. ROOTS -->
+<section class="section section--ivory" id="roots">
+  <div class="wrap story">
+    <div class="story-photo">
+      <picture>
+        <source srcset="img/roots.webp" type="image/webp">
+        <img src="img/roots.jpg" alt="Exposed roots of a mature tree" loading="lazy">
+      </picture>
+    </div>
+    <div>
+      <p class="eyebrow">Roots</p>
+      <h2>Richer knowledge.</h2>
+      <p class="lede">The strongest foundations are built on everything you've learned.</p>
+      <p>Like the roots of a mature tree, an organization's knowledge grows deeper and stronger over time. Every project, proposal, contract, presentation, email conversation and working document contributes to its collective experience. Across years of activity, these records contain not only the final outcomes but also the discussions, revisions, decisions and learning that shaped them. Together, they form an invaluable foundation of organizational knowledge.</p>
+      <p>Yet conventional document processing can leave valuable information behind. KnowledgeReady extracts and structures richer information from supported enterprise documents, preserving elements such as:</p>
+      <ul class="plain">
+        <li><strong>Comments</strong> — discussions and explanations behind the content.</li>
+        <li><strong>Tracked changes</strong> — how documents evolved over time.</li>
+        <li><strong>Speaker notes</strong> — context and narrative behind presentations.</li>
+        <li><strong>Metadata</strong> — information about the source document.</li>
+        <li><strong>Document structure</strong> — how information is organized and related.</li>
+      </ul>
+      <p><strong>Your organization's history is an asset. Make more of it accessible.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3. TRUNK -->
+<section class="section section--forest" id="trunk">
+  <div class="wrap story reverse">
+    <div class="story-photo">
+      <picture>
+        <source srcset="img/trunk.webp" type="image/webp">
+        <img src="img/trunk.jpg" alt="Strong, mature tree trunk" loading="lazy">
+      </picture>
+    </div>
+    <div>
+      <p class="eyebrow">Trunk</p>
+      <h2>More capable AI.</h2>
+      <p class="lede">Stronger foundations support more capable AI.</p>
+      <p>Just as a mature tree draws strength from its roots, enterprise AI depends on the quality and completeness of the information available to it. When documents are flattened or converted, important context can disappear before AI ever has an opportunity to use it.</p>
+      <p>KnowledgeReady works upstream of your existing AI systems. It processes supported native documents, extracting, preserving and structuring richer information for downstream applications — enterprise AI assistants and agents, retrieval-augmented generation (RAG), enterprise search and knowledge platforms, and document-dependent AI workflows. KnowledgeReady is not another AI platform. It strengthens the information entering the AI workflow you already have.</p>
+      <div class="feature-grid">
+        <div class="feature-card"><h3>Richer extraction</h3><p style="margin:0">Preserve valuable document elements that other processing methods may overlook.</p></div>
+        <div class="feature-card"><h3>Greater control</h3><p style="margin:0">Process supported native Office files locally, with hosted API and enterprise deployment options also available.</p></div>
+        <div class="feature-card"><h3>Faster processing</h3><p style="margin:0">Native document processing designed for low latency and large document volumes.</p></div>
+      </div>
+      <p><strong>Better information in. Better AI out.</strong></p>
+      <p><a class="link" href="mailto:knowledgeready@sunholo.com?subject=KnowledgeReady%20-%20Discuss%20a%20use%20case">Have a use case in mind? Let's discuss it →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4. BRANCHES -->
+<section class="section section--ivory" id="branches">
+  <div class="wrap story">
+    <div class="story-photo">
+      <picture>
+        <source srcset="img/crown.webp" type="image/webp">
+        <img src="img/crown.jpg" alt="Spreading branches and green canopy" loading="lazy">
+      </picture>
+    </div>
+    <div>
+      <p class="eyebrow">Branches</p>
+      <h2>More capable people.</h2>
+      <p class="lede">When knowledge becomes accessible, organizations can grow.</p>
+      <p>The branches of a mature tree represent growth, new possibilities and the ability to reach further. Organizations grow in much the same way, building on the experience, decisions and achievements of the people who came before. Imagine what becomes possible when employees can access not only what was decided, but also how and why.</p>
+      <ul class="plain">
+        <li><strong>Learn from previous work.</strong> Understand the thinking behind earlier projects, proposals and decisions rather than repeatedly starting from scratch.</li>
+        <li><strong>Accelerate new initiatives.</strong> Build on previous research, product development, customer experience and organizational learning.</li>
+        <li><strong>Improve decisions.</strong> Give people access to more relevant context when evaluating alternatives and planning their next steps.</li>
+        <li><strong>Strengthen organizational continuity.</strong> Preserve useful business knowledge so experience is less dependent on individual employees.</li>
+        <li><strong>Identify opportunities for improvement.</strong> Use accumulated experience to recognize recurring challenges and improve processes.</li>
+      </ul>
+      <p>KnowledgeReady helps create the information foundation. Your AI applications can help make that knowledge accessible to the people who need it.</p>
+      <p><strong>The ultimate opportunity isn't simply more capable AI. It's more capable people.</strong></p>
+      <p><a class="link" href="#product-evidence">See what KnowledgeReady preserves ↓</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5. PRODUCT EVIDENCE -->
+<section class="section section--forest" id="product-evidence">
+  <div class="wrap">
+    <p class="eyebrow">What it preserves</p>
+    <h2>Discover what your documents have been hiding.</h2>
+    <p class="lede">See the difference richer document extraction can make.</p>
+    <p>Before information can contribute to an AI system, it must first be extracted from its source. KnowledgeReady processes supported native Office documents directly, preserving information that may be omitted by conventional conversion or extraction methods.</p>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>Word documents</h3><p style="margin:0">Capture comments, tracked changes and document structure to provide more context about how content evolved.</p></div>
+      <div class="feature-card"><h3>PowerPoint presentations</h3><p style="margin:0">Extract slide content and speaker notes, making more of the presentation's underlying narrative available.</p></div>
+      <div class="feature-card"><h3>Enterprise documents</h3><p style="margin:0">Preserve supported metadata and structural information that help downstream systems interpret extracted content.</p></div>
+    </div>
+    <h3 style="margin-top:36px">Measurable document-processing performance</h3>
+    <p>Independently benchmarked on OfficeDocBench — 69 real Office files, 11 formats, 7 scoring dimensions, 17 features — against 8 other parsing tools.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="num">92%</span><span class="label">Composite accuracy, 100% format coverage</span></div>
+      <div class="stat"><span class="num">68%</span><span class="label">Nearest competitor, coverage-adjusted</span></div>
+      <div class="stat"><span class="num">44ms</span><span class="label">Per file, batch folder parsing</span></div>
+    </div>
+    <p class="fine">AILANG Parse leads on every scoring dimension and is one of only two tools tested with 100% format coverage. Benchmark is open-source and reproducible — see full methodology and results on the AILANG Parse site. These results concern document extraction performance, not guaranteed improvements in downstream AI accuracy or business outcomes.</p>
+    <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+      <a class="btn" style="background:var(--ivory-light);color:var(--forest)" href="https://www.sunholo.com/ailang-parse/workbench.html?ref=robert">Try the technology</a>
+      <a class="link" href="https://www.sunholo.com/ailang-parse/benchmarks.html?ref=robert">Explore the technical documentation →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6. TRY -->
+<section class="section section--ivory">
+  <div class="wrap cta-final">
+    <h2>How much more could your AI learn from the documents you already have?</h2>
+    <p class="lede">Start small. Prove it with your own documents.</p>
+    <p style="max-width:640px;margin:0 auto 16px">You don't need to replace your AI platform to explore the value of richer document information. Start with a document where context matters — a presentation with speaker notes, a working document with comments and revisions, a proposal that evolved through several iterations.</p>
+    <p style="max-width:640px;margin:0 auto 16px">See what KnowledgeReady extracts and consider what additional information your AI applications could use.</p>
+    <div style="max-width:420px;margin:0 auto;text-align:left;background:var(--ivory-light);border:1px solid rgba(35,61,44,.12);border-radius:12px;padding:20px 24px">
+      <strong>Try it in your browser</strong>
+      <ul class="plain" style="margin-top:10px">
+        <li>No signup required.</li>
+        <li>Supported native Office files are processed locally in your browser.</li>
+        <li>Your documents do not need to leave your machine for the browser-based trial.</li>
+        <li>Use the Workbench to explore multiple files.</li>
+      </ul>
+    </div>
+    <div class="btn-wrap">
+      <a class="btn" href="https://www.sunholo.com/ailang-parse/workbench.html?ref=robert">Try the technology</a>
+    </div>
+    <p class="hero-sub">Opens the AILANG Parse Workbench from Sunholo. For more advanced evaluation, explore the <a class="link" href="https://www.sunholo.com/ailang-parse/?ref=robert">API, MCP integration, local executable and enterprise deployment options</a>.</p>
+  </div>
+</section>
+
+<!-- SECTION 7. DISCUSS -->
+<section class="section section--ivory" id="discuss-your-use-case" style="padding-top:0">
+  <div class="wrap cta-final" style="max-width:720px">
+    <h2>What could richer knowledge help your organization achieve?</h2>
+    <p class="lede">I'd love to hear what you're working on.</p>
+    <p>Perhaps you're building an internal AI assistant, improving enterprise search, exploring how to preserve organizational knowledge, or looking for ways to help people make better decisions. Whether you're exploring possibilities, planning a project or already implementing an AI solution, I'd welcome hearing about what you're trying to achieve and where you are in the process.</p>
+    <p><strong>Let's exchange perspectives on your use case.</strong></p>
+    <a class="btn" href="mailto:knowledgeready@sunholo.com?subject=KnowledgeReady%20-%20Discuss%20a%20use%20case">Discuss your use case</a>
+    <p class="hero-sub">Robert Alexander Johnson, KnowledgeReady Commercial Enquiries — <a class="link" href="mailto:knowledgeready@sunholo.com">knowledgeready@sunholo.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <img src="img/wordmark-transparent.png" alt="KnowledgeReady" style="height:28px;margin-bottom:10px">
+      <p style="color:var(--sage)">Richer knowledge. More capable AI. More capable people.<br>Powered by AILANG Parse technology from Sunholo.</p>
+    </div>
+    <div class="col">
+      <h4>Try it</h4>
+      <p><a href="https://www.sunholo.com/ailang-parse/workbench.html?ref=robert">Try the technology</a></p>
+      <p><a href="https://www.sunholo.com/ailang-parse/?ref=robert">Explore AILANG Parse</a></p>
+    </div>
+    <div class="col">
+      <h4>Commercial enquiries</h4>
+      <p>Robert Alexander Johnson</p>
+      <p><a href="mailto:knowledgeready@sunholo.com">knowledgeready@sunholo.com</a></p>
+    </div>
+    <div class="col">
+      <h4>Technical support</h4>
+      <p><a href="mailto:docparse@sunholo.com">docparse@sunholo.com</a></p>
+    </div>
+  </div>
+  <div class="wrap bottom-line">KnowledgeReady — a Sunholo product.</div>
+</footer>
+
+</body>
+</html>
