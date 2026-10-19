@@ -97,8 +97,6 @@
   @media (min-width:860px){.story{grid-template-columns:1fr 1fr}}
   .story-photo{border-radius:16px;overflow:hidden;aspect-ratio:4/3}
   .story-photo img{width:100%;height:100%;object-fit:cover}
-  .story.reverse .story-photo{order:2}
-  @media (max-width:859px){.story.reverse .story-photo{order:0}}
   ul.plain{margin:0 0 16px;padding-left:20px}
   ul.plain li{margin-bottom:8px}
 
@@ -109,6 +107,22 @@
     border-radius:12px;padding:22px;
   }
   .section--forest .feature-card{background:rgba(255,255,255,.06);border-color:rgba(234,232,220,.18)}
+  .feature-stack{display:flex;flex-direction:column;gap:14px;margin:24px 0}
+  .feature-stack .feature-card{padding:18px 20px}
+
+  /* combined intro: Richer knowledge / More capable AI */
+  .intro-combined{display:grid;grid-template-columns:1fr;gap:48px}
+  @media (min-width:860px){.intro-combined{grid-template-columns:1fr 1fr}}
+  .intro-card{display:flex;flex-direction:column}
+  .intro-card .card-photo{border-radius:16px;overflow:hidden;aspect-ratio:4/3;margin-bottom:22px}
+  .intro-card .card-photo img{width:100%;height:100%;object-fit:cover}
+  .intro-card .payoff{margin-top:auto;padding-top:8px}
+
+  /* comparison examples: contract / pptx */
+  .compare{display:grid;grid-template-columns:1fr;gap:20px;margin:28px 0}
+  @media (min-width:760px){.compare{grid-template-columns:1fr 1fr}}
+  .compare img{width:100%;height:auto;border-radius:12px;box-shadow:0 2px 14px rgba(35,61,44,.1)}
+  .compare-note{text-align:center;max-width:560px;margin:8px auto 0}
 
   .stat-row{display:flex;flex-wrap:wrap;gap:36px;margin:28px 0}
   .stat{min-width:140px}
@@ -168,21 +182,19 @@
   </div>
 </section>
 
-<!-- SECTION 2. ROOTS -->
+<!-- SECTION 2. RICHER KNOWLEDGE / MORE CAPABLE AI (combined) -->
 <section class="section section--ivory" id="roots">
-  <div class="wrap story">
-    <div class="story-photo">
-      <picture>
-        <source srcset="img/roots.webp" type="image/webp">
-        <img src="img/roots.jpg" alt="Exposed roots of a mature tree" loading="lazy">
-      </picture>
-    </div>
-    <div>
+  <div class="wrap intro-combined">
+    <div class="intro-card">
+      <div class="card-photo">
+        <picture>
+          <source srcset="img/roots.webp" type="image/webp">
+          <img src="img/roots.jpg" alt="Exposed roots of a mature tree" loading="lazy">
+        </picture>
+      </div>
       <p class="eyebrow">Roots</p>
       <h2>Richer knowledge.</h2>
       <p class="lede">The strongest foundations are built on everything you've learned.</p>
-      <p>Like the roots of a mature tree, an organization's knowledge grows deeper and stronger over time. Every project, proposal, contract, presentation, email conversation and working document contributes to its collective experience. Across years of activity, these records contain not only the final outcomes but also the discussions, revisions, decisions and learning that shaped them. Together, they form an invaluable foundation of organizational knowledge.</p>
-      <p>Yet conventional document processing can leave valuable information behind. KnowledgeReady extracts and structures richer information from supported enterprise documents, preserving elements such as:</p>
       <ul class="plain">
         <li><strong>Comments</strong> — discussions and explanations behind the content.</li>
         <li><strong>Tracked changes</strong> — how documents evolved over time.</li>
@@ -190,38 +202,70 @@
         <li><strong>Metadata</strong> — information about the source document.</li>
         <li><strong>Document structure</strong> — how information is organized and related.</li>
       </ul>
-      <p><strong>Your organization's history is an asset. Make more of it accessible.</strong></p>
+      <p class="payoff"><strong>Your organization's history is an asset. Make more of it accessible.</strong></p>
     </div>
-  </div>
-</section>
-
-<!-- SECTION 3. TRUNK -->
-<section class="section section--forest" id="trunk">
-  <div class="wrap story reverse">
-    <div class="story-photo">
-      <picture>
-        <source srcset="img/trunk.webp" type="image/webp">
-        <img src="img/trunk.jpg" alt="Strong, mature tree trunk" loading="lazy">
-      </picture>
-    </div>
-    <div>
+    <div class="intro-card" id="trunk">
+      <div class="card-photo">
+        <picture>
+          <source srcset="img/trunk.webp" type="image/webp">
+          <img src="img/trunk.jpg" alt="Strong, mature tree trunk" loading="lazy">
+        </picture>
+      </div>
       <p class="eyebrow">Trunk</p>
       <h2>More capable AI.</h2>
       <p class="lede">Stronger foundations support more capable AI.</p>
-      <p>Just as a mature tree draws strength from its roots, enterprise AI depends on the quality and completeness of the information available to it. When documents are flattened or converted, important context can disappear before AI ever has an opportunity to use it.</p>
-      <p>KnowledgeReady works upstream of your existing AI systems. It processes supported native documents, extracting, preserving and structuring richer information for downstream applications — enterprise AI assistants and agents, retrieval-augmented generation (RAG), enterprise search and knowledge platforms, and document-dependent AI workflows. KnowledgeReady is not another AI platform. It strengthens the information entering the AI workflow you already have.</p>
-      <div class="feature-grid">
+      <div class="feature-stack">
         <div class="feature-card"><h3>Richer extraction</h3><p style="margin:0">Preserve valuable document elements that other processing methods may overlook.</p></div>
         <div class="feature-card"><h3>Greater control</h3><p style="margin:0">Process supported native Office files locally, with hosted API and enterprise deployment options also available.</p></div>
         <div class="feature-card"><h3>Faster processing</h3><p style="margin:0">Native document processing designed for low latency and large document volumes.</p></div>
       </div>
-      <p><strong>Better information in. Better AI out.</strong></p>
-      <p><a class="link" href="mailto:knowledgeready@sunholo.com?subject=KnowledgeReady%20-%20Discuss%20a%20use%20case">Have a use case in mind? Let's discuss it →</a></p>
+      <p class="payoff"><strong>Better information in. Better AI out.</strong></p>
     </div>
   </div>
 </section>
 
-<!-- SECTION 4. BRANCHES -->
+<!-- SECTION 3. EXAMPLE — CONTRACT -->
+<section class="section section--forest">
+  <div class="wrap">
+    <p class="eyebrow">Example — contract</p>
+    <h2>The price is clear. KnowledgeReady captures the context.</h2>
+    <p class="lede" style="max-width:720px">A text-only extraction can capture the agreed price while leaving out the discussion behind it.</p>
+    <p style="max-width:720px">KnowledgeReady also captures comments and tracked changes retained in the source Word file, making pricing assumptions, accepted risks and intended follow-up available to AI.</p>
+    <div class="compare">
+      <picture>
+        <source srcset="img/contract-standard.webp" type="image/webp">
+        <img src="img/contract-standard.png" alt="Standard text extraction of a subscription agreement, showing only the final terms">
+      </picture>
+      <picture>
+        <source srcset="img/contract-knowledgeready.webp" type="image/webp">
+        <img src="img/contract-knowledgeready.png" alt="KnowledgeReady extraction of the same agreement, showing terms plus the negotiation context behind them">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4. EXAMPLE — PRESENTATION -->
+<section class="section section--forest" style="padding-top:0;border-top:1px solid rgba(234,232,220,.15)">
+  <div class="wrap">
+    <p class="eyebrow">Example — presentation</p>
+    <h2>The slide inspires. The speaker notes explain why.</h2>
+    <p class="lede" style="max-width:720px">A sales slide may contain only a headline and a few words.</p>
+    <p style="max-width:720px">The speaker notes can hold the product positioning, differentiation and guidance behind the presentation. KnowledgeReady captures those notes when they are present in the source PowerPoint file.</p>
+    <div class="compare">
+      <picture>
+        <source srcset="img/pptx-standard.webp" type="image/webp">
+        <img src="img/pptx-standard.png" alt="Standard text extraction of a presentation slide, showing only the slide text">
+      </picture>
+      <picture>
+        <source srcset="img/pptx-knowledgeready.webp" type="image/webp">
+        <img src="img/pptx-knowledgeready.png" alt="KnowledgeReady extraction of the same slide, showing the slide text plus structured speaker notes">
+      </picture>
+    </div>
+    <p class="fine compare-note">Illustrative scenarios. Comments, tracked changes and speaker notes must be present in the source files. Negotiation context does not override signed terms.</p>
+  </div>
+</section>
+
+<!-- SECTION 5. BRANCHES -->
 <section class="section section--ivory" id="branches">
   <div class="wrap story">
     <div class="story-photo">
@@ -249,7 +293,7 @@
   </div>
 </section>
 
-<!-- SECTION 5. PRODUCT EVIDENCE -->
+<!-- SECTION 6. PRODUCT EVIDENCE -->
 <section class="section section--forest" id="product-evidence">
   <div class="wrap">
     <p class="eyebrow">What it preserves</p>
@@ -276,7 +320,7 @@
   </div>
 </section>
 
-<!-- SECTION 6. TRY -->
+<!-- SECTION 7. TRY -->
 <section class="section section--ivory">
   <div class="wrap cta-final">
     <h2>How much more could your AI learn from the documents you already have?</h2>
@@ -299,7 +343,7 @@
   </div>
 </section>
 
-<!-- SECTION 7. DISCUSS -->
+<!-- SECTION 8. DISCUSS -->
 <section class="section section--ivory" id="discuss-your-use-case" style="padding-top:0">
   <div class="wrap cta-final" style="max-width:720px">
     <h2>What could richer knowledge help your organization achieve?</h2>
