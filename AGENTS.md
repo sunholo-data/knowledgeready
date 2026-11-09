@@ -26,6 +26,12 @@ missing, say BLOCKED.
 Do not add JavaScript, dependencies, trackers, analytics, external embeds, fonts
 from new hosts, form actions, `.github/` changes, `CNAME` or domain settings.
 
+One exception, approved by Mark on 2026-11-09: the single inline `<script>` at
+the end of `index.html` that copies `utm_*` onto the AILANG Parse links and sends
+one cookieless visit count (`fetch` with `credentials: 'omit'`). Keep it as it
+is, unchanged and in place. It is the only script allowed: don't add others,
+don't extend it, and don't remove it. A change to it is Mark's call.
+
 Checks, as there is no compilation: confirm the HTML is well formed and every
 changed `src`/`srcset`/`href` resolves to a file in the repository. Inspect the
 page in a browser at desktop width and below 640px, where the header nav must not
