@@ -401,11 +401,16 @@
         a.href = u.toString();
       });
     }
-    if (navigator.webdriver || navigator.doNotTrack === '1' || navigator.globalPrivacyControl || !navigator.sendBeacon) return;
+    if (navigator.webdriver || navigator.doNotTrack === '1' || navigator.globalPrivacyControl || !window.fetch) return;
     var body = { site: 'knowledgeready', page: location.pathname };
     Object.keys(utm).forEach(function (k) { body[k] = utm[k]; });
-    navigator.sendBeacon('https://docparse.ailang.sunholo.com/api/v1/visit',
-      new Blob([JSON.stringify(body)], { type: 'text/plain' }));
+    /* fetch with credentials omitted, not sendBeacon: sendBeacon always sends
+       cookies, and the AILANG Parse campaign cookie is set for sunholo.com. */
+    fetch('https://docparse.ailang.sunholo.com/api/v1/visit', {
+      method: 'POST', body: JSON.stringify(body), keepalive: true,
+      credentials: 'omit', mode: 'no-cors', referrerPolicy: 'no-referrer',
+      headers: { 'Content-Type': 'text/plain' }
+    }).catch(function () {});
   } catch (e) { /* never break the page */ }
 })();
 </script>
