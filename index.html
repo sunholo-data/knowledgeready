@@ -379,5 +379,35 @@
   <div class="wrap bottom-line">KnowledgeReady — a Sunholo product.</div>
 </footer>
 
+<script>
+/* Visit count and campaign pass-through. No cookies, no identifiers.
+   1. Copies any utm_* from this page's address onto the links to AILANG Parse,
+      so a campaign's source survives the click (the ?ref=robert stays as it is).
+   2. Sends one content-free beacon to the AILANG Parse API: this site, the page
+      path and the utm_* values. Skipped under Do Not Track, Global Privacy
+      Control or automated browsers. Owner-approved exception to "no JavaScript"
+      (2026-11-09); see the AILANG Parse privacy policy. */
+(function () {
+  try {
+    var q = new URLSearchParams(location.search), utm = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+      var v = q.get(k);
+      if (v && v.length <= 100 && !/[<>"]/.test(v)) utm[k] = v;
+    });
+    if (Object.keys(utm).length) {
+      document.querySelectorAll('a[href^="https://www.sunholo.com/ailang-parse/"]').forEach(function (a) {
+        var u = new URL(a.href);
+        Object.keys(utm).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, utm[k]); });
+        a.href = u.toString();
+      });
+    }
+    if (navigator.webdriver || navigator.doNotTrack === '1' || navigator.globalPrivacyControl || !navigator.sendBeacon) return;
+    var body = { site: 'knowledgeready', page: location.pathname };
+    Object.keys(utm).forEach(function (k) { body[k] = utm[k]; });
+    navigator.sendBeacon('https://docparse.ailang.sunholo.com/api/v1/visit',
+      new Blob([JSON.stringify(body)], { type: 'text/plain' }));
+  } catch (e) { /* never break the page */ }
+})();
+</script>
 </body>
 </html>
