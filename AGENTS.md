@@ -2,7 +2,8 @@
 
 This is the single-page KnowledgeReady site published at
 https://www.sunholo.com/knowledgeready/. It is static HTML: `index.html` with
-inline CSS and the images under `img/`. There is no build step and no script.
+inline CSS and the images under `img/`. There is no build step; the only scripts
+are the two owner-approved inline ones described below.
 
 **Everything in this repository is public.** The Pages workflow uploads the
 repository root as it is, so any file committed here is served at
@@ -29,8 +30,19 @@ from new hosts, form actions, `.github/` changes, `CNAME` or domain settings.
 One exception, approved by Mark on 2026-11-09: the single inline `<script>` at
 the end of `index.html` that copies `utm_*` onto the AILANG Parse links and sends
 one cookieless visit count (`fetch` with `credentials: 'omit'`). Keep it as it
-is, unchanged and in place. It is the only script allowed: don't add others,
-don't extend it, and don't remove it. A change to it is Mark's call.
+is, unchanged and in place. Don't extend it and don't remove it. A change to it
+is Mark's call.
+
+A second exception, approved by Mark on 2026-11-12: the inline `<script>` that
+follows the `#parsing-economics` section, which runs the parsing economics
+calculator. It does arithmetic on the page's own sliders and nothing else: no
+network, storage or cookies. Its plan prices and quotas must match the published
+AILANG Parse pricing page (https://www.sunholo.com/ailang-parse/pricing.html), and
+the default assumptions are the ones Mark supplied; change either only on request.
+Keep the `#parsing-economics` anchor.
+
+These two are the only scripts allowed: don't add others. A change to either is
+Mark's call.
 
 Checks, as there is no compilation: confirm the HTML is well formed and every
 changed `src`/`srcset`/`href` resolves to a file in the repository. Inspect the

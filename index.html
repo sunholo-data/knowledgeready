@@ -142,6 +142,21 @@
   footer .col h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
   footer .col p{margin:0 0 6px;color:var(--ivory-light)}
   .bottom-line{border-top:1px solid rgba(234,232,220,.15);margin-top:32px;padding-top:20px;font-size:12.5px;color:var(--sage)}
+
+  /* parsing economics calculator */
+  .calc{display:grid;grid-template-columns:1fr;gap:36px;margin-top:32px;align-items:start}
+  @media (min-width:860px){.calc{grid-template-columns:1fr 1fr;gap:48px}}
+  .calc-field{margin-bottom:22px}
+  .calc-field label{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:15.5px;margin-bottom:6px}
+  .calc-field output{font-variant-numeric:tabular-nums;color:var(--muted-green)}
+  .calc input[type=range]{width:100%;accent-color:var(--muted-green);margin:0}
+  .calc-card{background:var(--ivory);border-radius:12px;padding:20px 24px;margin-bottom:14px}
+  .calc-card p{margin:0 0 4px;font-size:15px;color:var(--bark)}
+  .calc-card .num{display:block;font-size:clamp(26px,3.4vw,34px);font-weight:700;color:var(--forest);font-variant-numeric:tabular-nums;line-height:1.25}
+  .calc-card .plan{font-size:14px;color:var(--muted-green);font-weight:600}
+  .calc-working{font-size:15px;color:var(--bark);margin:14px 0}
+  .calc-caveat{background:var(--ivory-light);border:1px solid var(--sage);border-left:4px solid var(--bark);border-radius:8px;padding:14px 18px;font-size:15px;color:var(--bark);margin:0}
+  .calc-limits{margin-top:32px;border-top:1px solid rgba(35,61,44,.12);padding-top:18px}
 </style>
 </head>
 <body>
@@ -319,6 +334,92 @@
     </div>
   </div>
 </section>
+
+<!-- SECTION 6b. PARSING ECONOMICS (calculator; the one other script, owner-approved, see AGENTS.md) -->
+<section class="section section--ivory" id="parsing-economics" style="border-bottom:1px solid rgba(35,61,44,.12)">
+  <div class="wrap">
+    <p class="eyebrow">Parsing economics</p>
+    <h2>Explore your document parsing economics</h2>
+    <p style="max-width:760px">Adjust the assumptions to estimate the difference between page-based parsing fees and the published AILANG Parse plan prices for eligible native documents. This is a discussion aid, not a validated quote or savings guarantee.</p>
+    <div class="calc">
+      <div>
+        <div class="calc-field">
+          <label for="pe-docs">Documents per month <output id="pe-docs-out" for="pe-docs">411,000</output></label>
+          <input type="range" id="pe-docs" min="1000" max="1000000" step="1000" value="411000">
+        </div>
+        <div class="calc-field">
+          <label for="pe-eligible">Eligible native documents (%) <output id="pe-eligible-out" for="pe-eligible">90</output></label>
+          <input type="range" id="pe-eligible" min="0" max="100" step="1" value="90">
+        </div>
+        <div class="calc-field">
+          <label for="pe-pages">Average billable pages per document <output id="pe-pages-out" for="pe-pages">14</output></label>
+          <input type="range" id="pe-pages" min="1" max="50" step="1" value="14">
+        </div>
+        <div class="calc-field">
+          <label for="pe-price">Current price per 1,000 pages (USD) <output id="pe-price-out" for="pe-price">32</output></label>
+          <input type="range" id="pe-price" min="1" max="50" step="0.5" value="32">
+        </div>
+        <div class="calc-field">
+          <label for="pe-reproc">Reprocessing rate (%) <output id="pe-reproc-out" for="pe-reproc">10</output></label>
+          <input type="range" id="pe-reproc" min="0" max="50" step="1" value="10">
+        </div>
+      </div>
+      <div aria-live="polite">
+        <div class="calc-card"><p>Estimated current monthly parsing fees</p><span class="num" id="pe-fees">$182,287</span></div>
+        <div class="calc-card"><p>Estimated AILANG Parse monthly plan</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business plan, up to 500,000 requests</span></div>
+        <div class="calc-card"><p>Illustrative annual fee difference</p><span class="num" id="pe-annual">$2,186,124</span></div>
+        <p class="calc-working" id="pe-working">369,900 eligible native documents × 1.10 processing factor = 406,890 requests/month; 5,696,460 modeled billable pages/month.</p>
+        <p class="calc-caveat">The comparison excludes scanned PDFs and AI parse workloads. Check file eligibility, plan limits and equivalent output quality before interpreting savings.</p>
+        <noscript><p class="fine" style="margin-top:12px">The figures shown are for the default assumptions; the sliders need JavaScript.</p></noscript>
+      </div>
+    </div>
+    <p class="fine calc-limits"><strong>Important limitations:</strong> The comparison only covers the eligible native-document workload and assumes functional equivalence. AILANG Parse AI/PDF parse quotas are much smaller than standard document request quotas and are not modeled here. Actual results depend on file formats, processing quality, plan terms, daily rate limits, discounts, integration, infrastructure and review costs. The current page-based price is an editable prospect assumption, not a universal competitor price. EUR/USD conversion is a fixed illustrative 1.108 USD per EUR. Published plan assumptions: Free €0/1,000 requests; Pro €29/100,000 requests; Business €99/500,000 requests; volumes above 500,000 requests a month are priced by arrangement. Validate pricing and eligibility before external publication. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">AILANG Parse pricing source</a>.</p>
+  </div>
+</section>
+<script>
+/* Parsing economics calculator. Arithmetic on the sliders only: no network,
+   no storage, no cookies. Owner-approved second exception to "no JavaScript"
+   (2026-11-12); see AGENTS.md. */
+(function () {
+  try {
+    var USD_PER_EUR = 1.108;
+    var PLANS = [
+      { name: 'Free', eur: 0, quota: 1000 },
+      { name: 'Pro', eur: 29, quota: 100000 },
+      { name: 'Business', eur: 99, quota: 500000 }
+    ];
+    var n = new Intl.NumberFormat('en-US');
+    var usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    var ids = ['docs', 'eligible', 'pages', 'price', 'reproc'];
+    function el(id) { return document.getElementById('pe-' + id); }
+    function update() {
+      var v = {};
+      ids.forEach(function (k) { v[k] = Number(el(k).value); el(k + '-out').textContent = n.format(v[k]); });
+      var eligible = Math.round(v.docs * v.eligible / 100);
+      var factor = 1 + v.reproc / 100;
+      var requests = Math.round(eligible * factor);
+      var pages = requests * v.pages;
+      var fees = pages / 1000 * v.price;
+      var plan = null;
+      for (var i = 0; i < PLANS.length; i++) { if (requests <= PLANS[i].quota) { plan = PLANS[i]; break; } }
+      el('fees').textContent = usd.format(fees);
+      if (plan) {
+        el('plan').textContent = '€' + plan.eur + ' / month';
+        el('plan-name').textContent = plan.name + ' plan, up to ' + n.format(plan.quota) + ' requests';
+        el('annual').textContent = usd.format(Math.round((fees - plan.eur * USD_PER_EUR) * 12));
+      } else {
+        el('plan').textContent = 'By arrangement';
+        el('plan-name').textContent = 'Above the published plans (500,000 requests a month)';
+        el('annual').textContent = 'Not modeled';
+      }
+      el('working').textContent = n.format(eligible) + ' eligible native documents × ' + factor.toFixed(2) +
+        ' processing factor = ' + n.format(requests) + ' requests/month; ' + n.format(pages) + ' modeled billable pages/month.';
+    }
+    ids.forEach(function (k) { el(k).addEventListener('input', update); });
+    update();
+  } catch (e) { /* never break the page */ }
+})();
+</script>
 
 <!-- SECTION 7. TRY -->
 <section class="section section--ivory">
