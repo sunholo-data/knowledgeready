@@ -154,6 +154,15 @@
   .calc-card p{margin:0 0 4px;font-size:15px;color:var(--bark)}
   .calc-card .num{display:block;font-size:clamp(26px,3.4vw,34px);font-weight:700;color:var(--forest);font-variant-numeric:tabular-nums;line-height:1.25}
   .calc-card .plan{font-size:14px;color:var(--muted-green);font-weight:600}
+  .calc-pair{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+  @media (min-width:520px){.calc-pair{grid-template-columns:1fr 1fr}}
+  .calc-pair .calc-card{margin-bottom:0}
+  .calc-pair .num{font-size:clamp(22px,2.6vw,26px)}
+  .calc-headline{background:var(--forest);color:var(--ivory-light);border-radius:12px;padding:24px 26px;margin-bottom:14px}
+  .calc-headline p{margin:0 0 4px;font-size:15px;color:var(--sage);font-weight:600;letter-spacing:.02em}
+  .calc-headline .num{display:block;font-size:clamp(38px,5.2vw,54px);font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+  .calc-headline .sub{display:block;margin-top:6px;font-size:14px;color:var(--sage);font-variant-numeric:tabular-nums}
+  .calc-hint{display:block;font-size:13.5px;color:var(--bark);margin-top:4px}
   .calc-working{font-size:15px;color:var(--bark);margin:14px 0}
   .calc-caveat{background:var(--ivory-light);border:1px solid var(--sage);border-left:4px solid var(--bark);border-radius:8px;padding:14px 18px;font-size:15px;color:var(--bark);margin:0}
   .calc-limits{margin-top:32px;border-top:1px solid rgba(35,61,44,.12);padding-top:18px}
@@ -340,12 +349,12 @@
   <div class="wrap">
     <p class="eyebrow">Parsing economics</p>
     <h2>Explore your document parsing economics</h2>
-    <p style="max-width:760px">Adjust the assumptions to estimate the difference between page-based parsing fees and the published AILANG Parse plan prices for eligible native documents. This is a discussion aid, not a validated quote or savings guarantee.</p>
+    <p style="max-width:760px">Adjust the assumptions to estimate the difference between page-based parsing fees and published KnowledgeReady subscription fees for eligible native documents. This is a discussion aid, not a validated quote or savings guarantee.</p>
     <div class="calc">
       <div>
         <div class="calc-field">
           <label for="pe-docs">Documents per month <output id="pe-docs-out" for="pe-docs">411,000</output></label>
-          <input type="range" id="pe-docs" min="1000" max="1000000" step="1000" value="411000">
+          <input type="range" id="pe-docs" min="1000" max="500000" step="1000" value="411000">
         </div>
         <div class="calc-field">
           <label for="pe-eligible">Eligible native documents (%) <output id="pe-eligible-out" for="pe-eligible">90</output></label>
@@ -361,19 +370,22 @@
         </div>
         <div class="calc-field">
           <label for="pe-reproc">Reprocessing rate (%) <output id="pe-reproc-out" for="pe-reproc">10</output></label>
-          <input type="range" id="pe-reproc" min="0" max="50" step="1" value="10">
+          <input type="range" id="pe-reproc" min="0" max="50" step="1" value="10" aria-describedby="pe-reproc-hint">
+          <span class="calc-hint" id="pe-reproc-hint">Documents parsed again in the same month: edited and re-indexed, pipeline re-runs, retries. Each is billed again.</span>
         </div>
       </div>
       <div aria-live="polite">
-        <div class="calc-card"><p>Estimated current monthly parsing fees</p><span class="num" id="pe-fees">$182,287</span></div>
-        <div class="calc-card"><p>Estimated AILANG Parse monthly plan</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business plan, up to 500,000 requests</span></div>
-        <div class="calc-card"><p>Illustrative annual fee difference</p><span class="num" id="pe-annual">$2,186,124</span></div>
+        <div class="calc-headline"><p id="pe-annual-label">Illustrative annual saving</p><span class="num" id="pe-annual">$2,186,124</span><span class="sub" id="pe-monthly">$182,177 a month</span></div>
+        <div class="calc-pair">
+          <div class="calc-card"><p>Estimated current monthly parsing fees</p><span class="num" id="pe-fees">$182,287</span></div>
+          <div class="calc-card"><p>Estimated KnowledgeReady monthly subscription</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business, up to 500,000 requests</span></div>
+        </div>
         <p class="calc-working" id="pe-working">369,900 eligible native documents × 1.10 processing factor = 406,890 requests/month; 5,696,460 modeled billable pages/month.</p>
         <p class="calc-caveat">The comparison excludes scanned PDFs and AI parse workloads. Check file eligibility, plan limits and equivalent output quality before interpreting savings.</p>
         <noscript><p class="fine" style="margin-top:12px">The figures shown are for the default assumptions; the sliders need JavaScript.</p></noscript>
       </div>
     </div>
-    <p class="fine calc-limits"><strong>Important limitations:</strong> The comparison only covers the eligible native-document workload and assumes functional equivalence. AILANG Parse AI/PDF parse quotas are much smaller than standard document request quotas and are not modeled here. Actual results depend on file formats, processing quality, plan terms, daily rate limits, discounts, integration, infrastructure and review costs. The current page-based price is an editable prospect assumption, not a universal competitor price. EUR/USD conversion is a fixed illustrative 1.108 USD per EUR. Published plan assumptions: Free €0/1,000 requests; Pro €29/100,000 requests; Business €99/500,000 requests; volumes above 500,000 requests a month are priced by arrangement. Validate pricing and eligibility before external publication. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">AILANG Parse pricing source</a>.</p>
+    <p class="fine calc-limits"><strong>Important limitations:</strong> The comparison only covers the eligible native-document workload and assumes functional equivalence. KnowledgeReady AI/PDF parse quotas are much smaller than standard document request quotas and are not modeled here. Actual results depend on file formats, processing quality, plan terms, daily rate limits, discounts, integration, infrastructure and review costs. The current page-based price is an editable prospect assumption, not a universal competitor price. EUR/USD conversion is a fixed illustrative 1.108 USD per EUR. Published subscription assumptions: Free €0/1,000 requests; Pro €29/100,000 requests; Business €99/500,000 requests; volumes above 500,000 requests a month are priced by arrangement. Validate pricing and eligibility before external publication. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">KnowledgeReady pricing source</a>.</p>
   </div>
 </section>
 <script>
@@ -405,12 +417,17 @@
       el('fees').textContent = usd.format(fees);
       if (plan) {
         el('plan').textContent = '€' + plan.eur + ' / month';
-        el('plan-name').textContent = plan.name + ' plan, up to ' + n.format(plan.quota) + ' requests';
-        el('annual').textContent = usd.format(Math.round((fees - plan.eur * USD_PER_EUR) * 12));
+        el('plan-name').textContent = plan.name + ', up to ' + n.format(plan.quota) + ' requests';
+        var monthly = fees - plan.eur * USD_PER_EUR;
+        el('annual-label').textContent = monthly >= 0 ? 'Illustrative annual saving' : 'No saving at these assumptions: annual extra cost';
+        el('annual').textContent = usd.format(Math.round(Math.abs(monthly) * 12));
+        el('monthly').textContent = usd.format(Math.abs(monthly)) + ' a month';
       } else {
         el('plan').textContent = 'By arrangement';
-        el('plan-name').textContent = 'Above the published plans (500,000 requests a month)';
+        el('plan-name').textContent = 'Above the published subscriptions (500,000 requests a month)';
+        el('annual-label').textContent = 'Illustrative annual saving';
         el('annual').textContent = 'Not modeled';
+        el('monthly').textContent = 'Volumes above 500,000 requests a month are priced by arrangement';
       }
       el('working').textContent = n.format(eligible) + ' eligible native documents × ' + factor.toFixed(2) +
         ' processing factor = ' + n.format(requests) + ' requests/month; ' + n.format(pages) + ' modeled billable pages/month.';
