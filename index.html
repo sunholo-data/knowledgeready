@@ -142,6 +142,30 @@
   footer .col h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
   footer .col p{margin:0 0 6px;color:var(--ivory-light)}
   .bottom-line{border-top:1px solid rgba(234,232,220,.15);margin-top:32px;padding-top:20px;font-size:12.5px;color:var(--sage)}
+
+  /* parsing economics calculator */
+  .calc{display:grid;grid-template-columns:1fr;gap:36px;margin-top:32px;align-items:start}
+  @media (min-width:860px){.calc{grid-template-columns:1fr 1fr;gap:48px}}
+  .calc-field{margin-bottom:22px}
+  .calc-field label{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:15.5px;margin-bottom:6px}
+  .calc-field output{font-variant-numeric:tabular-nums;color:var(--muted-green)}
+  .calc input[type=range]{width:100%;accent-color:var(--muted-green);margin:0}
+  .calc-card{background:var(--ivory);border-radius:12px;padding:20px 24px;margin-bottom:14px}
+  .calc-card p{margin:0 0 4px;font-size:15px;color:var(--bark)}
+  .calc-card .num{display:block;font-size:clamp(26px,3.4vw,34px);font-weight:700;color:var(--forest);font-variant-numeric:tabular-nums;line-height:1.25}
+  .calc-card .plan{font-size:14px;color:var(--muted-green);font-weight:600}
+  .calc-pair{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+  @media (min-width:520px){.calc-pair{grid-template-columns:1fr 1fr}}
+  .calc-pair .calc-card{margin-bottom:0}
+  .calc-pair .num{font-size:clamp(22px,2.6vw,26px)}
+  .calc-headline{background:var(--forest);color:var(--ivory-light);border-radius:12px;padding:24px 26px;margin-bottom:14px}
+  .calc-headline p{margin:0 0 4px;font-size:15px;color:var(--sage);font-weight:600;letter-spacing:.02em}
+  .calc-headline .num{display:block;font-size:clamp(38px,5.2vw,54px);font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+  .calc-headline .sub{display:block;margin-top:6px;font-size:14px;color:var(--sage);font-variant-numeric:tabular-nums}
+  .calc-hint{display:block;font-size:13.5px;color:var(--bark);margin-top:4px}
+  .calc-working{font-size:15px;color:var(--bark);margin:14px 0}
+  .calc-caveat{background:var(--ivory-light);border:1px solid var(--sage);border-left:4px solid var(--bark);border-radius:8px;padding:14px 18px;font-size:15px;color:var(--bark);margin:0}
+  .calc-limits{margin-top:32px;border-top:1px solid rgba(35,61,44,.12);padding-top:18px}
 </style>
 </head>
 <body>
@@ -319,6 +343,100 @@
     </div>
   </div>
 </section>
+
+<!-- SECTION 6b. PARSING ECONOMICS (calculator; the one other script, owner-approved, see AGENTS.md) -->
+<section class="section section--ivory" id="parsing-economics" style="border-bottom:1px solid rgba(35,61,44,.12)">
+  <div class="wrap">
+    <p class="eyebrow">Cost comparison</p>
+    <h2>What could you save on document parsing?</h2>
+    <p style="max-width:760px">Most parsing services charge by the page. KnowledgeReady is a monthly subscription, whatever the page count. Move the sliders to compare the two. This is an estimate to start a conversation, not a quote.</p>
+    <div class="calc">
+      <div>
+        <div class="calc-field">
+          <label for="pe-docs">Documents per month <output id="pe-docs-out" for="pe-docs">411,000</output></label>
+          <input type="range" id="pe-docs" min="1000" max="500000" step="1000" value="411000">
+        </div>
+        <div class="calc-field">
+          <label for="pe-eligible">Native documents (%) <output id="pe-eligible-out" for="pe-eligible">90</output></label>
+          <input type="range" id="pe-eligible" min="0" max="100" step="1" value="90" aria-describedby="pe-eligible-hint">
+          <span class="calc-hint" id="pe-eligible-hint">Word, PowerPoint, Excel and other digital files. Scanned PDFs and images are not counted.</span>
+        </div>
+        <div class="calc-field">
+          <label for="pe-pages">Average pages per document <output id="pe-pages-out" for="pe-pages">14</output></label>
+          <input type="range" id="pe-pages" min="1" max="50" step="1" value="14">
+        </div>
+        <div class="calc-field">
+          <label for="pe-price">What you pay per 1,000 pages (USD) <output id="pe-price-out" for="pe-price">32</output></label>
+          <input type="range" id="pe-price" min="1" max="50" step="0.5" value="32">
+        </div>
+        <div class="calc-field">
+          <label for="pe-reproc">Documents parsed again (%) <output id="pe-reproc-out" for="pe-reproc">10</output></label>
+          <input type="range" id="pe-reproc" min="0" max="50" step="1" value="10" aria-describedby="pe-reproc-hint">
+          <span class="calc-hint" id="pe-reproc-hint">Files processed again in the same month, for example after an edit or a re-index. Each one is billed again.</span>
+        </div>
+      </div>
+      <div aria-live="polite">
+        <div class="calc-headline"><p id="pe-annual-label">Estimated saving per year</p><span class="num" id="pe-annual">$2,186,124</span><span class="sub" id="pe-monthly">$182,177 a month</span></div>
+        <div class="calc-pair">
+          <div class="calc-card"><p>What you pay now, per month</p><span class="num" id="pe-fees">$182,287</span></div>
+          <div class="calc-card"><p>KnowledgeReady subscription</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business plan, up to 500,000 documents a month</span></div>
+        </div>
+        <p class="calc-working" id="pe-working">Based on 406,890 documents a month (369,900 native, plus 10% parsed again) and 5,696,460 pages.</p>
+        <p class="calc-caveat">Scanned PDFs and images are not included. Check that your files qualify and that the results meet your needs before relying on these figures.</p>
+        <noscript><p class="fine" style="margin-top:12px">These figures use the default values. The sliders need JavaScript.</p></noscript>
+      </div>
+    </div>
+    <p class="fine calc-limits"><strong>How this is worked out:</strong> Only native documents are counted, and both services are assumed to give equivalent results. Scanned PDFs and images use a separate, smaller AI parsing allowance that is not included. Your real costs also depend on file types, contract terms, daily limits, discounts, and the work of integrating and checking results. The price per page is your own figure, not a quote from any provider. Euros are converted at a fixed 1.108 US dollars per euro. Subscriptions: Free, €0 for 1,000 documents a month; Pro, €29 for 100,000; Business, €99 for 500,000; larger volumes by arrangement. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">See KnowledgeReady pricing</a>.</p>
+  </div>
+</section>
+<script>
+/* Parsing economics calculator. Arithmetic on the sliders only: no network,
+   no storage, no cookies. Owner-approved second exception to "no JavaScript"
+   (2026-11-12); see AGENTS.md. */
+(function () {
+  try {
+    var USD_PER_EUR = 1.108;
+    var PLANS = [
+      { name: 'Free', eur: 0, quota: 1000 },
+      { name: 'Pro', eur: 29, quota: 100000 },
+      { name: 'Business', eur: 99, quota: 500000 }
+    ];
+    var n = new Intl.NumberFormat('en-US');
+    var usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    var ids = ['docs', 'eligible', 'pages', 'price', 'reproc'];
+    function el(id) { return document.getElementById('pe-' + id); }
+    function update() {
+      var v = {};
+      ids.forEach(function (k) { v[k] = Number(el(k).value); el(k + '-out').textContent = n.format(v[k]); });
+      var eligible = Math.round(v.docs * v.eligible / 100);
+      var factor = 1 + v.reproc / 100;
+      var requests = Math.round(eligible * factor);
+      var pages = requests * v.pages;
+      var fees = pages / 1000 * v.price;
+      var plan = null;
+      for (var i = 0; i < PLANS.length; i++) { if (requests <= PLANS[i].quota) { plan = PLANS[i]; break; } }
+      el('fees').textContent = usd.format(fees);
+      if (plan) {
+        el('plan').textContent = '€' + plan.eur + ' / month';
+        el('plan-name').textContent = plan.name + ' plan, up to ' + n.format(plan.quota) + ' documents a month';
+        var monthly = fees - plan.eur * USD_PER_EUR;
+        el('annual-label').textContent = monthly >= 0 ? 'Estimated saving per year' : 'No saving at these numbers. Extra cost per year';
+        el('annual').textContent = usd.format(Math.round(Math.abs(monthly) * 12));
+        el('monthly').textContent = usd.format(Math.abs(monthly)) + ' a month';
+      } else {
+        el('plan').textContent = 'By arrangement';
+        el('plan-name').textContent = 'Over 500,000 documents a month';
+        el('annual-label').textContent = 'Estimated saving per year';
+        el('annual').textContent = 'Not estimated';
+        el('monthly').textContent = 'Above 500,000 documents a month, pricing is by arrangement';
+      }
+      el('working').textContent = 'Based on ' + n.format(requests) + ' documents a month (' + n.format(eligible) + ' native, plus ' + n.format(v.reproc) + '% parsed again) and ' + n.format(pages) + ' pages.';
+    }
+    ids.forEach(function (k) { el(k).addEventListener('input', update); });
+    update();
+  } catch (e) { /* never break the page */ }
+})();
+</script>
 
 <!-- SECTION 7. TRY -->
 <section class="section section--ivory">
