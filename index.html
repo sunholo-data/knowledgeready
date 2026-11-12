@@ -347,9 +347,9 @@
 <!-- SECTION 6b. PARSING ECONOMICS (calculator; the one other script, owner-approved, see AGENTS.md) -->
 <section class="section section--ivory" id="parsing-economics" style="border-bottom:1px solid rgba(35,61,44,.12)">
   <div class="wrap">
-    <p class="eyebrow">Parsing economics</p>
-    <h2>Explore your document parsing economics</h2>
-    <p style="max-width:760px">Adjust the assumptions to estimate the difference between page-based parsing fees and published KnowledgeReady subscription fees for eligible native documents. This is a discussion aid, not a validated quote or savings guarantee.</p>
+    <p class="eyebrow">Cost comparison</p>
+    <h2>What could you save on document parsing?</h2>
+    <p style="max-width:760px">Most parsing services charge by the page. KnowledgeReady is a monthly subscription, whatever the page count. Move the sliders to compare the two. This is an estimate to start a conversation, not a quote.</p>
     <div class="calc">
       <div>
         <div class="calc-field">
@@ -357,35 +357,36 @@
           <input type="range" id="pe-docs" min="1000" max="500000" step="1000" value="411000">
         </div>
         <div class="calc-field">
-          <label for="pe-eligible">Eligible native documents (%) <output id="pe-eligible-out" for="pe-eligible">90</output></label>
-          <input type="range" id="pe-eligible" min="0" max="100" step="1" value="90">
+          <label for="pe-eligible">Native documents (%) <output id="pe-eligible-out" for="pe-eligible">90</output></label>
+          <input type="range" id="pe-eligible" min="0" max="100" step="1" value="90" aria-describedby="pe-eligible-hint">
+          <span class="calc-hint" id="pe-eligible-hint">Word, PowerPoint, Excel and other digital files. Scanned PDFs and images are not counted.</span>
         </div>
         <div class="calc-field">
-          <label for="pe-pages">Average billable pages per document <output id="pe-pages-out" for="pe-pages">14</output></label>
+          <label for="pe-pages">Average pages per document <output id="pe-pages-out" for="pe-pages">14</output></label>
           <input type="range" id="pe-pages" min="1" max="50" step="1" value="14">
         </div>
         <div class="calc-field">
-          <label for="pe-price">Current price per 1,000 pages (USD) <output id="pe-price-out" for="pe-price">32</output></label>
+          <label for="pe-price">What you pay per 1,000 pages (USD) <output id="pe-price-out" for="pe-price">32</output></label>
           <input type="range" id="pe-price" min="1" max="50" step="0.5" value="32">
         </div>
         <div class="calc-field">
-          <label for="pe-reproc">Reprocessing rate (%) <output id="pe-reproc-out" for="pe-reproc">10</output></label>
+          <label for="pe-reproc">Documents parsed again (%) <output id="pe-reproc-out" for="pe-reproc">10</output></label>
           <input type="range" id="pe-reproc" min="0" max="50" step="1" value="10" aria-describedby="pe-reproc-hint">
-          <span class="calc-hint" id="pe-reproc-hint">Documents parsed again in the same month: edited and re-indexed, pipeline re-runs, retries. Each is billed again.</span>
+          <span class="calc-hint" id="pe-reproc-hint">Files processed again in the same month, for example after an edit or a re-index. Each one is billed again.</span>
         </div>
       </div>
       <div aria-live="polite">
-        <div class="calc-headline"><p id="pe-annual-label">Illustrative annual saving</p><span class="num" id="pe-annual">$2,186,124</span><span class="sub" id="pe-monthly">$182,177 a month</span></div>
+        <div class="calc-headline"><p id="pe-annual-label">Estimated saving per year</p><span class="num" id="pe-annual">$2,186,124</span><span class="sub" id="pe-monthly">$182,177 a month</span></div>
         <div class="calc-pair">
-          <div class="calc-card"><p>Estimated current monthly parsing fees</p><span class="num" id="pe-fees">$182,287</span></div>
-          <div class="calc-card"><p>Estimated KnowledgeReady monthly subscription</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business, up to 500,000 requests</span></div>
+          <div class="calc-card"><p>What you pay now, per month</p><span class="num" id="pe-fees">$182,287</span></div>
+          <div class="calc-card"><p>KnowledgeReady subscription</p><span class="num" id="pe-plan">€99 / month</span><span class="plan" id="pe-plan-name">Business plan, up to 500,000 documents a month</span></div>
         </div>
-        <p class="calc-working" id="pe-working">369,900 eligible native documents × 1.10 processing factor = 406,890 requests/month; 5,696,460 modeled billable pages/month.</p>
-        <p class="calc-caveat">The comparison excludes scanned PDFs and AI parse workloads. Check file eligibility, plan limits and equivalent output quality before interpreting savings.</p>
-        <noscript><p class="fine" style="margin-top:12px">The figures shown are for the default assumptions; the sliders need JavaScript.</p></noscript>
+        <p class="calc-working" id="pe-working">Based on 406,890 documents a month (369,900 native, plus 10% parsed again) and 5,696,460 pages.</p>
+        <p class="calc-caveat">Scanned PDFs and images are not included. Check that your files qualify and that the results meet your needs before relying on these figures.</p>
+        <noscript><p class="fine" style="margin-top:12px">These figures use the default values. The sliders need JavaScript.</p></noscript>
       </div>
     </div>
-    <p class="fine calc-limits"><strong>Important limitations:</strong> The comparison only covers the eligible native-document workload and assumes functional equivalence. KnowledgeReady AI/PDF parse quotas are much smaller than standard document request quotas and are not modeled here. Actual results depend on file formats, processing quality, plan terms, daily rate limits, discounts, integration, infrastructure and review costs. The current page-based price is an editable prospect assumption, not a universal competitor price. EUR/USD conversion is a fixed illustrative 1.108 USD per EUR. Published subscription assumptions: Free €0/1,000 requests; Pro €29/100,000 requests; Business €99/500,000 requests; volumes above 500,000 requests a month are priced by arrangement. Validate pricing and eligibility before external publication. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">KnowledgeReady pricing source</a>.</p>
+    <p class="fine calc-limits"><strong>How this is worked out:</strong> Only native documents are counted, and both services are assumed to give equivalent results. Scanned PDFs and images use a separate, smaller AI parsing allowance that is not included. Your real costs also depend on file types, contract terms, daily limits, discounts, and the work of integrating and checking results. The price per page is your own figure, not a quote from any provider. Euros are converted at a fixed 1.108 US dollars per euro. Subscriptions: Free, €0 for 1,000 documents a month; Pro, €29 for 100,000; Business, €99 for 500,000; larger volumes by arrangement. <a class="link" style="font-size:inherit" href="https://www.sunholo.com/ailang-parse/pricing.html?ref=robert">See KnowledgeReady pricing</a>.</p>
   </div>
 </section>
 <script>
@@ -417,20 +418,19 @@
       el('fees').textContent = usd.format(fees);
       if (plan) {
         el('plan').textContent = '€' + plan.eur + ' / month';
-        el('plan-name').textContent = plan.name + ', up to ' + n.format(plan.quota) + ' requests';
+        el('plan-name').textContent = plan.name + ' plan, up to ' + n.format(plan.quota) + ' documents a month';
         var monthly = fees - plan.eur * USD_PER_EUR;
-        el('annual-label').textContent = monthly >= 0 ? 'Illustrative annual saving' : 'No saving at these assumptions: annual extra cost';
+        el('annual-label').textContent = monthly >= 0 ? 'Estimated saving per year' : 'No saving at these numbers. Extra cost per year';
         el('annual').textContent = usd.format(Math.round(Math.abs(monthly) * 12));
         el('monthly').textContent = usd.format(Math.abs(monthly)) + ' a month';
       } else {
         el('plan').textContent = 'By arrangement';
-        el('plan-name').textContent = 'Above the published subscriptions (500,000 requests a month)';
-        el('annual-label').textContent = 'Illustrative annual saving';
-        el('annual').textContent = 'Not modeled';
-        el('monthly').textContent = 'Volumes above 500,000 requests a month are priced by arrangement';
+        el('plan-name').textContent = 'Over 500,000 documents a month';
+        el('annual-label').textContent = 'Estimated saving per year';
+        el('annual').textContent = 'Not estimated';
+        el('monthly').textContent = 'Above 500,000 documents a month, pricing is by arrangement';
       }
-      el('working').textContent = n.format(eligible) + ' eligible native documents × ' + factor.toFixed(2) +
-        ' processing factor = ' + n.format(requests) + ' requests/month; ' + n.format(pages) + ' modeled billable pages/month.';
+      el('working').textContent = 'Based on ' + n.format(requests) + ' documents a month (' + n.format(eligible) + ' native, plus ' + n.format(v.reproc) + '% parsed again) and ' + n.format(pages) + ' pages.';
     }
     ids.forEach(function (k) { el(k).addEventListener('input', update); });
     update();
